@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "CarsonCapper",
+    "password": null,
+    "database": "tasks",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "CarsonCapper",
+    "password": null,
+    "database": "tasks",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "CarsonCapper",
+    "password": null,
+    "database": "tasks",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}

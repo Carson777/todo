@@ -10,16 +10,23 @@
           <input type="text" name="task" value="" placeholder="Enter a task sucka">
         </div>
         <input type="submit" value="Send!">
+      </form>
+
+      <form action="/complete" method="post">
         {{#tasks}}
         <br>
-          <button type="submit" name="done" value="{{.}}">Completed</button>
-          {{.}}
+          <button type="submit" name="done" value="{{dataValues.name}}">Completed</button>
+          {{dataValues.name}}
         {{/tasks}}
       </form>
+
       <p>Completed</p>
-      {{#done}}
+      <form action="/delete" method="post">
+        <button type="submit" name="delete">Delete Completed Tasks</button>
+      </form>
+      {{#completedTasks}}
       <br>
-      {{.}}
-      {{/done}}
+      {{dataValues.name}}
+      {{/completedTasks}}
   </body>
 </html>

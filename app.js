@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.listen(3000, function(){})
 
 app.get('/', function (req, res){
-	models.Task.findAll({where: {completed: false}})
+	models.Task.findAll({where: {completed: false}} && {order: [['createdAt', 'DESC']]})
 		.then( function(tasks2){
 			var incompleteTasks = tasks2;
 			models.Task.findAll({where: {completed: true}}).then( function(tasks3){

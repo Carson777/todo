@@ -12,37 +12,43 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.listen(3000, function(){})
 
 app.get('/', function (req, res){
-	models.Task.findAll({where: {completed: false}} && {order: [['createdAt', 'DESC']]})
-		.then( function(tasks2){
-			var incompleteTasks = tasks2;
-			models.Task.findAll({where: {completed: true}}).then( function(tasks3){
-				var completedTasks = tasks3;
-				res.render("home", {
-					tasks: incompleteTasks,
-					completedTasks: completedTasks
-					})
+	models.Task.findAll(
+	{where: {completed: false}})
+	.then( function(tasks2){
+		var incompleteTasks = tasks2;
+		models.Task.findAll(
+		{where: {completed: true}})
+		.then( function(tasks3){
+			var completedTasks = tasks3;
+			console.log(incompleteTasks)
+			res.render("home", {
+				tasks: incompleteTasks,
+				completedTasks: completedTasks
 			})
+		})
 	})
 
 });
+//mark tast as completed
 app.post('/complete', function (req, res){
 	models.Task.findOne({
-		where:{name: req.body.done}
-			}).then( function(task){
-				task.update({completed: true})
-					}).then( function(){
-						res.redirect('/')
+		where:{name: req.body.done}})
+		.then( function(task){
+			task.update({completed: true})})
+			.then( function(){
+				console.log('refreshing')
+			res.redirect('/')
 		})
 
 });
 app.post('/delete', function (req, res){
 	models.Task.findAll({
-		where: {completed: true}
-	}).then( function(tasks){
-		for (var i = 0; i < tasks.length; i++){
-			tasks[i].destroy()
-		}
-	})
+		where: {completed: true}})
+		.then( function(tasks){
+			for (var i = 0; i < tasks.length; i++){
+				tasks[i].destroy()
+			}
+		})
 	res.redirect('/')
 });
 
